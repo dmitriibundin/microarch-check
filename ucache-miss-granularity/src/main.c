@@ -3,5 +3,5 @@
 #define ITERATION_COUNT 1L << 31
 
 int main(void){
-    ucmc_8nopax_64b_1(ITERATION_COUNT);
+    ucmc_64b_nopax8_6(ITERATION_COUNT);
 }
