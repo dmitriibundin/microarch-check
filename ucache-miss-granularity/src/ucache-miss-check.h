@@ -37,6 +37,7 @@ void ucmc_64b_nopax7jmp_6(size_t iteration_count);
 /**
  * The ucmc_64b_nopax8nop19jmp_n routines consist of 8 times repeated nop ax following 
  * 19 of nops ending with an unconditional jmp to the beginning of the next 32-byte aligned chunk of code.
+ * This next 32-byte aligned chunk of code is either the beginning of the next such block or the loop conditional jump.
  *
  * n is the total number of 'times 8 nop ax times 19 nop jmp' blocks
  *
