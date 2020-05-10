@@ -113,7 +113,7 @@ ucmc_64b_nopax7jmp_6:
         times 19 nop
         %push
             jmp %$aligned_label
-            align 32
+            align 64
             %$aligned_label:
         %pop
     %endrep
