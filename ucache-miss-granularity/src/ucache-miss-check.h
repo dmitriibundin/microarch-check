@@ -34,4 +34,13 @@ void ucmc_64b_nopax7jmp_4(size_t iteration_count);
 void ucmc_64b_nopax7jmp_5(size_t iteration_count);
 void ucmc_64b_nopax7jmp_6(size_t iteration_count);
 
+/**
+ *
+ */
+void ucmc_64b_nopax8nop19jmp_1(size_t iteration_count);
+void ucmc_64b_nopax8nop19jmp_2(size_t iteration_count);
+void ucmc_64b_nopax8nop19jmp_3(size_t iteration_count);
+void ucmc_64b_nopax8nop19jmp_4(size_t iteration_count);
+void ucmc_64b_nopax8nop19jmp_5(size_t iteration_count);
+void ucmc_64b_nopax8nop19jmp_6(size_t iteration_count);
 #endif //UCACHE_MISS_CHECK_H

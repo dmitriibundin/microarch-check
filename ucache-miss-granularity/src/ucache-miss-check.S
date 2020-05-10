@@ -14,6 +14,13 @@ global ucmc_64b_nopax7jmp_4
 global ucmc_64b_nopax7jmp_5
 global ucmc_64b_nopax7jmp_6
 
+global ucmc_64b_nopax8nop19jmp_1
+global ucmc_64b_nopax8nop19jmp_2
+global ucmc_64b_nopax8nop19jmp_3
+global ucmc_64b_nopax8nop19jmp_4
+global ucmc_64b_nopax8nop19jmp_5
+global ucmc_64b_nopax8nop19jmp_6
+
 ;=============== Macro and implementaion of ucmc_64b_nopax8_n routines ===============
 %macro nopax8_rep 1
     %%loop:
@@ -58,9 +65,9 @@ ucmc_64b_nopax8_6:
         %ifdef ODD
             times 7 nop ax
             %push
-            jmp %$aligned_label
-            align 32
-            %$aligned_label:
+                jmp %$aligned_label
+                align 32
+                %$aligned_label:
             %pop
             %undef ODD
         %else
@@ -96,3 +103,45 @@ ucmc_64b_nopax7jmp_5:
 align 64
 ucmc_64b_nopax7jmp_6:
     nopax7jmp 6
+
+;=============== Macro and implementaion of ucmc_64b_nopax8nop20jmp_n routines ===============
+
+%macro nopax8nop19jmp 1
+    %%loop:
+    %rep %1
+        times 8 nop ax
+        times 19 nop
+        %push
+            jmp %$aligned_label
+            align 32
+            %$aligned_label:
+        %pop
+    %endrep
+    dec rdi
+    jnz %%loop
+    ret
+%endmacro
+
+align 64
+ucmc_64b_nopax8nop19jmp_1:
+    nopax8nop19jmp 1
+
+align 64
+ucmc_64b_nopax8nop19jmp_2:
+    nopax8nop19jmp 2
+
+align 64
+ucmc_64b_nopax8nop19jmp_3:
+    nopax8nop19jmp 3
+
+align 64
+ucmc_64b_nopax8nop19jmp_4:
+    nopax8nop19jmp 4
+
+align 64
+ucmc_64b_nopax8nop19jmp_5:
+    nopax8nop19jmp 5
+
+align 64
+ucmc_64b_nopax8nop19jmp_6:
+    nopax8nop19jmp 6
