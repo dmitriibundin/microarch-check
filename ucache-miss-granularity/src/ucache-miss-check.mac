@@ -72,9 +72,8 @@
 %endmacro
 
 %macro nop32nopax4jnzjmp 1
-    align 64
+    align 32
     %%loop:
-    times 32 nop
     %rep %1
         times 4 nop ax
         test edi, 0x1
