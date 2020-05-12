@@ -1,0 +1,81 @@
+%ifndef UCACHE_MISS_CHECK_MAC
+%define UCACHE_MISS_CHECK_MAC
+
+%macro nopax8_rep 1
+    align 64
+    %%loop:
+    %rep %1
+         times 8 nop ax
+    %endrep
+    dec rdi
+    jnz %%loop
+%endmacro
+
+%macro nopax7jmp 1
+    align 64
+    %%loop:
+    ;TODO: This is an ugly way to check for evennes of the current iteration
+    %define ODD
+    %rep %1
+        %ifdef ODD
+            times 7 nop ax
+            %push
+                jmp %$aligned_label
+                align 32
+                %$aligned_label:
+            %pop
+            %undef ODD
+        %else
+            times 8 nop ax
+            %define ODD
+        %endif
+    %endrep
+    dec rdi
+    jnz %%loop
+%endmacro
+
+%macro nopax8nop19jmp 1
+    align 64
+    %%loop:
+    %rep %1
+        times 8 nop ax
+        times 19 nop
+        %push
+            jmp %$aligned_label
+            align 64
+            %$aligned_label:
+        %pop
+    %endrep
+    dec rdi
+    jnz %%loop
+%endmacro
+
+%macro nopax7jmp_nop19jmp 1
+    align 64
+    %%loop:
+    %rep %1
+        times 7 nop ax
+        %push
+            jmp %$aligned_label
+            align 32
+            %$aligned_label:
+        %pop
+        times 19 nop
+        %push
+            jmp %$aligned_label
+            align 32
+            %$aligned_label:
+        %pop
+    %endrep
+    dec rdi
+    jnz %%loop
+%endmacro
+
+%macro nop32nopax4jnzjmp 1
+    %%loop:
+    %rep %1
+        times 32 nop
+    %endrep
+%endmacro
+
+%endif ;UCACHE_MISS_CHECK_MAC
