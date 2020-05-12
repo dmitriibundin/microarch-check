@@ -72,10 +72,23 @@
 %endmacro
 
 %macro nop32nopax4jnzjmp 1
+    align 64
     %%loop:
+    times 32 nop
     %rep %1
-        times 32 nop
+        times 4 nop ax
+        test edi, 0x1
+        %push
+            jnz %$lbl1
+            jmp %$lbl2
+            align 32
+            %$lbl1:
+            times 32 nop
+            %$lbl2:
+        %pop
     %endrep
+    dec rdi
+    jnz %%loop
 %endmacro
 
 %endif ;UCACHE_MISS_CHECK_MAC
