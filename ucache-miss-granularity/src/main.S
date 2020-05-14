@@ -15,5 +15,5 @@ global _start
 
 _start:
     mov rdi, ITERATION_COUNT
-    nop32nopax4jnzjmp 1
+    iftag_granularity_miss 1
     sys_exit 0

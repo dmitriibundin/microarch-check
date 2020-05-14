@@ -86,6 +86,22 @@
             %$lbl2:
         %pop
     %endrep
+    nop
+    dec rdi
+    jnz %%loop
+%endmacro
+
+%macro iftag_granularity_miss 1
+    align 64
+    %%loop:
+    times %1 nop
+    jmp %%next_instructio
+    %%next_instructio:
+    %assign ucache_rest_space 30 - %1
+    times ucache_rest_space nop
+    %%32_bytes_boundary: ;To simplify debugging
+    times 32 nop
+    %%loop_return:       ;To simplify debugging
     dec rdi
     jnz %%loop
 %endmacro

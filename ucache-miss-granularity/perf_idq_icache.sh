@@ -1,4 +1,4 @@
-perf stat -x, -e \
+perf stat -e \
 icache_16b.ifdata_stall:u,\
 icache_64b.iftag_hit:u,\
 icache_64b.iftag_miss:u,\

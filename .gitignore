@@ -65,3 +65,6 @@
 # IDE and build directories
 **/.vscode
 **/build/
+
+#gdb
+*.gdb
