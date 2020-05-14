@@ -15,5 +15,6 @@ global _start
 
 _start:
     mov rdi, ITERATION_COUNT
-    iftag_granularity_miss 1
+    nopax8nop19jmp 6
+;    iftag_granularity_miss 15
     sys_exit 0

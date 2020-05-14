@@ -68,3 +68,6 @@
 
 #gdb
 *.gdb
+
+#stat_parse
+output.csv
