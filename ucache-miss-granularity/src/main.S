@@ -13,8 +13,30 @@ section .text
 
 global _start
 
+example_fun:
+    align 64
+    times 8 nop ax
+    .loop:
+    times 4 nop ax
+    test edi, 0x1
+    jnz .no_fetch_start
+    times 2 nop ax
+    .cache_line_boundary: ;To simplify debugging
+    times 2 nop ax
+    nop dword [eax + 1 * eax + 0x1]
+    jmp .loop_branch
+    .no_fetch_start:
+    times 4 nop ax
+    .32bytes_boundary:    ;To simplify debugging
+    times 6 nop ax
+    nop dword [eax + 1 * eax + 0x1]
+    jmp .loop_branch
+    .loop_branch:
+    dec rdi
+    jnz .loop
+    ret
+
 _start:
     mov rdi, ITERATION_COUNT
-    nopax8nop19jmp 6
-;    iftag_granularity_miss 15
+    call example_fun
     sys_exit 0
